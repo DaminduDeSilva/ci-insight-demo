@@ -8,17 +8,18 @@ jobs:
       - uses: actions/checkout@v3
       
       - name: Make agent executable
-        run: chmod +x agent/insight-shell.sh
+        run: chmod +x wrapper/insight-shell.sh
         
       - name: Run Monitored Commands
         env:
           BACKEND_URL: ${{ secrets.BACKEND_URL }}
-        # shell: bash ${{ github.workspace }}/agent/insight-shell.sh {0}
+        shell: bash wrapper/insight-shell.sh {0}
         run: |
-          echo "Debugging: Listing files"
-          ls -R
-          
-          echo "Running Manual Wrapper Test..."
-          ./agent/insight-shell.sh "npm --version"
-          ./agent/insight-shell.sh "node --version"
-          ./agent/insight-shell.sh "echo 'Manual Build Step'"
+          echo "Starting Remote Pipeline..."
+          npm --version
+          node --version
+          echo "Building..."
+          sleep 1
+          echo "Testing..."
+          sleep 1
+          echo "Deploying..."

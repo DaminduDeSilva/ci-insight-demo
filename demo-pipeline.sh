@@ -1,6 +1,6 @@
 #!/bin/bash
 
-export SHELL="$(pwd)/agent/insight-shell.sh"
+export SHELL="$(pwd)/wrapper/insight-shell.sh"
 
 echo "Running pipeline..."
 
