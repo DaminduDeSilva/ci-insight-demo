@@ -13,7 +13,7 @@ jobs:
       - name: Run Monitored Commands
         env:
           BACKEND_URL: ${{ secrets.BACKEND_URL }}
-        shell: bash agent/insight-shell.sh {0}
+        shell: bash ${{ github.workspace }}/agent/insight-shell.sh {0}
         run: |
           echo "Starting Remote Pipeline..."
           npm --version
