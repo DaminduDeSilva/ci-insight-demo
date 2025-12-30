@@ -15,7 +15,7 @@ EXIT_CODE=$?
 
 END_TIME=$(date +%s)
 
-curl -s -X POST "$BACKEND_URL" \
+curl -f -X POST "$BACKEND_URL" \
   -H "Content-Type: application/json" \
   -d "{
     \"command\": \"$COMMAND\",
@@ -23,7 +23,7 @@ curl -s -X POST "$BACKEND_URL" \
     \"exitCode\": $EXIT_CODE,
     \"startTime\": $START_TIME,
     \"endTime\": $END_TIME
-  }" >/dev/null
+  }" || echo "!!! LOG UPLOAD FAILED to $BACKEND_URL !!!"
 
 echo "$OUTPUT"
 exit $EXIT_CODE
