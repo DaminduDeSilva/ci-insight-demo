@@ -5,7 +5,12 @@ BACKEND_URL="${BACKEND_URL:-http://localhost:4000/log}"
 COMMAND="$*"
 START_TIME=$(date +%s)
 
-OUTPUT=$($COMMAND 2>&1)
+# Detect if we are running a script file (GitHub Actions way) or a command string
+if [ -f "$1" ]; then
+  OUTPUT=$(bash "$@" 2>&1)
+else
+  OUTPUT=$($COMMAND 2>&1)
+fi
 EXIT_CODE=$?
 
 END_TIME=$(date +%s)
