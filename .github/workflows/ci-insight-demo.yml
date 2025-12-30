@@ -1,0 +1,25 @@
+name: CI Insight Demo
+on: [push, workflow_dispatch]
+
+jobs:
+  demo-pipeline:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      
+      - name: Make agent executable
+        run: chmod +x agent/insight-shell.sh
+        
+      - name: Run Monitored Commands
+        env:
+          BACKEND_URL: ${{ secrets.BACKEND_URL }}
+        shell: ./agent/insight-shell.sh {0}
+        run: |
+          echo "Starting Remote Pipeline..."
+          npm --version
+          node --version
+          echo "Building..."
+          sleep 1
+          echo "Testing..."
+          sleep 1
+          echo "Deploying..."
